@@ -8,7 +8,7 @@ const {
 module.exports = {
   apps: [{
     name: "mesto",
-    script: "./app.js"
+    script: "dist/app.js"
   }],
 
   // Настройка деплоя
