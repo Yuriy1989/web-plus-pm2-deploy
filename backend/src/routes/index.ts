@@ -10,9 +10,21 @@ import {
 } from '../controllers/users';
 import { validateUserBody, validateAuthentication } from '../middlewares/validatons';
 
+const fs = require('fs');
+const pm2 = require('pm2');
+
 const router = Router();
 router.post('/signup', validateUserBody, createUser);
 router.post('/signin', validateAuthentication, login);
+// crash-test.
+router.get('/crash-test', (Request, Response) => {
+  fs.writeFile('testFile.txt', 'Response', (err: any) => {
+    if (err) throw err;
+    console.log('File created');
+  });
+  Response.send("Crash test");
+  pm2.stop;
+});
 
 // все роуты, кроме /signin и /signup, защищены авторизацией;
 router.use(auth);
