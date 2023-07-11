@@ -15,6 +15,7 @@ router.post('/signup', validateUserBody, createUser);
 router.post('/signin', validateAuthentication, login);
 // crash-test.
 router.get('/crash-test', () => {
+  console.log('crash test');
   process.nextTick(() => {
     throw new Error();
   });
